@@ -1,5 +1,5 @@
 const path = require('path');
-
+const html = require('html-webpack-plugin');
 module.exports = {
     entry: "./src/script.js", 
     output: {
@@ -24,9 +24,16 @@ module.exports = {
       ]
     },
     devServer: {
-      contentBase: path.join(__dirname, 'src'),
+      contentBase: path.join(__dirname, 'dist'),
       compress: true,
       port: 9000
     },
+    plugins:[
+      new html({
+        template:"./src/index.html",
+        filename:'test.html',
+        minify:false
+      })
+    ],
     watch:true
 }
