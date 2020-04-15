@@ -1,2 +1,11 @@
-import style from"./style.sass"
-document.write('112211');
+import script2 from "./script2"
+document.write('1122121');
+
+function a(b){
+    console.log(b)
+}
+
+
+(singleParam) => {console.log('tr') }
+a("loh");
+
