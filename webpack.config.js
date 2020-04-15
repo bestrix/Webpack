@@ -1,5 +1,6 @@
 const path = require('path');
 const html = require('html-webpack-plugin');
+const css = require('mini-css-extract-plugin');
 module.exports = {
     entry: "./src/script.js", 
     output: {
@@ -13,8 +14,12 @@ module.exports = {
         { 
           test: /\.s[ac]ss$/,
           use: [
-            // Creates `style` nodes from JS strings
-            'style-loader',
+            {
+              loader: css.loader,
+              options: {
+                publicPath: './dist',
+              },
+            },
             // Translates CSS into CommonJS
             'css-loader',
             // Compiles Sass to CSS
@@ -33,6 +38,10 @@ module.exports = {
         template:"./src/index.html",
         filename:'test.html',
         minify:false
+      }),
+      new css({
+        filename: 'fuck.css',
+        chunkFilename: '[id].css',
       })
     ],
     watch:true
