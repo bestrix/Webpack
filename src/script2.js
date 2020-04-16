@@ -1,5 +1,6 @@
 
+import "./style.css"
 
-export default function script2(){
-    console.log('script2')
-}
+    console.log('script3');
+
+
