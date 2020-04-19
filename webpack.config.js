@@ -11,52 +11,55 @@ const smp = new SpeedMeasurePlugin();
 const {CleanWebpackPlugin} = require("clean-webpack-plugin");
 
 
-module.exports = smp.wrap({
-  //абсолютный путь к паки сорс для entry
-    context: path.resolve(__dirname,"./src"),
-    entry: {
-      main:'./script.js',
-      main2:'./script2.js'
-    }, 
+const path = require('path');
+const html = require('html-webpack-plugin');
+const css = require('mini-css-extract-plugin');
+
+//публичный путь картинки
+//шрифты
+//jquery
+//css normalize
+//bootsrrap
+module.exports = {
+    entry: "./src/script.js", 
     output: {
       path: __dirname + '/dist', 
-      filename: '[name][contenthash].js', 
-      publicPath: path.join(__dirname,"./dist")
+      filename: 'bundle.js', 
+      publicPath:'/dist'
     },
     mode:"production",
     module:{
       rules:[
-        {
-          test: /\.js$/,
-          exclude: /node_modules/,
-          use: {
-            loader: "babel-loader"
-          }
+        { 
+          test: /\.s[ac]ss$/,
+          use: [
+            {
+              loader: css.loader,
+              options: {
+                publicPath: './dist',
+              },
+            },
+            'css-loader',
+            'sass-loader',
+          ],
         },
-        {
-        test:/\.css/,
-        use:["style-loader", "css-loader"]
-      },
-      {
-        test:/\.s[ac]ss/,
-        use:["style-loader", "css-loader","sass-loader"]
-      },
-      {
-        test: /\.(png|jpe?g|gif)$/,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]',
-          output: './',
-          useRelativePath: true
-        },
-      },
       ]
+    },
+    devServer: {
+      contentBase: path.join(__dirname, 'dist'),
+      compress: true,
+      port: 9000
     },
     plugins:[
       new html({
-        filename:"main.html",
-        template:"./index.html"
+        template:"./src/index.html",
+        filename:'test.html',
+        minify:false
       }),
-      new CleanWebpackPlugin()
-    ]
-})
+      new css({
+        filename: 'fuck.css',
+        chunkFilename: '[id].css',
+      })
+    ],
+    watch:true
+}
