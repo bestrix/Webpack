@@ -14,6 +14,8 @@ const html = require('html-webpack-plugin');
 const css = require('mini-css-extract-plugin');
 
 //публичный путь картинки
+//clean
+//css
 //шрифты
 //jquery
 //css normalize
@@ -34,7 +36,7 @@ module.exports = {
             {
               loader: css.loader,
               options: {
-                publicPath: './dist',
+  
               },
             },
             'css-loader',
@@ -57,8 +59,8 @@ module.exports = {
     },
     devServer: {
       contentBase: path.join(__dirname, 'dist'),
-      compress: true,
-      port: 9000
+      port: 9000,
+      overlay:true
     },
     plugins:[
       new html({
@@ -66,10 +68,8 @@ module.exports = {
         filename:'test.html',
         minify:false
       }),
-      new css({
-        filename: 'fuck.css',
-        chunkFilename: '[id].css',
-      })
+      new css(),
+      
     ],
     watch:true
 }

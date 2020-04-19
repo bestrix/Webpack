@@ -4,3 +4,4 @@ import json from "./assets/json"
 import logo from "./assets/1.png"
 console.log(json,logo)
 
+console.log("workinh")

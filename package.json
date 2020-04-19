@@ -25,7 +25,7 @@
     "webpack-dev-server": "^3.10.3"
   },
   "scripts": {
-    "n": "webpack-dev-server --open",
+    "n": " webpack-dev-server --mode development --open",
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
     "wath": "webpack --mode development --watch"
