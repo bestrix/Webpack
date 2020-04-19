@@ -45,7 +45,9 @@ module.exports = smp.wrap({
         test: /\.(png|jpe?g|gif)$/,
         loader: 'file-loader',
         options: {
-
+          name: '[name].[ext]',
+          output: './',
+          useRelativePath: true
         },
       },
       ]
