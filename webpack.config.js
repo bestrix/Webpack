@@ -13,13 +13,18 @@ const path = require('path');
 const html = require('html-webpack-plugin');
 const css = require('mini-css-extract-plugin');
 
+
+
+//jquery
+//css normalize
+//bootsrrap
+//xml ,csv
+
+//done 
 //публичный путь картинки
 //clean
 //css
 //шрифты
-//jquery
-//css normalize
-//bootsrrap
 module.exports = {
     entry: "./src/script.js", 
     output: {
@@ -55,6 +60,18 @@ module.exports = {
            'file-loader',
          ],
        },
+       {
+        test: /\.xml$/,
+        use: [
+          'xml-loader',
+        ],
+      },
+      {
+        test: /\.csv$/,
+        use: [
+          'csv-loader',
+        ],
+      },
       ]
     },
     devServer: {
@@ -71,5 +88,4 @@ module.exports = {
       new css(),
       
     ],
-    watch:true
 }
