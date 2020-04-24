@@ -28,9 +28,20 @@ const css = require('mini-css-extract-plugin');
 module.exports = {
     entry: "./src/script.js", 
     output: {
-      path: __dirname + '/dist', 
+      path: __dirname + '@dist', 
       filename: 'bundle.js', 
       //publicPath:'/dist'
+    },
+    resolve: {
+      extensions: ['.wasm', '.csv', '.js', '.json'],
+      alias:{
+        '@dist':path.resolve(__dirname,"/dist")
+      }
+    },
+    optimization:{
+      splitChunks:{
+        chunks:"all"
+      }
     },
     mode:"production",
     module:{
@@ -86,6 +97,5 @@ module.exports = {
         minify:false
       }),
       new css(),
-      
     ],
 }
