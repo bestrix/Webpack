@@ -12,7 +12,7 @@ const {CleanWebpackPlugin} = require("clean-webpack-plugin");
 const path = require('path');
 const html = require('html-webpack-plugin');
 const css = require('mini-css-extract-plugin');
-
+const CopyPlugin = require('copy-webpack-plugin');
 
 
 //jquery
@@ -97,5 +97,9 @@ module.exports = {
         minify:false
       }),
       new css(),
+      new CopyPlugin([
+        { from: './src/testCopy', to: '@dist' },
+ 
+      ]),
     ],
 }
