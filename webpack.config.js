@@ -3,6 +3,7 @@
 //>50 установка плагина html и clean-webpack-plugin настройка script в pachage.json
 //>60 context для того чтобы не пропис полный путь и подкл css loader
 //>1.10 import json and image
+//>1.40 - process.env.NODE_ENV
 // const path = require('path');
 // const html = require('html-webpack-plugin');
 // const css = require('mini-css-extract-plugin');
@@ -13,18 +14,28 @@ const path = require('path');
 const html = require('html-webpack-plugin');
 const css = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+var OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
+const isDev = process.env.NODE_ENV === "development";
+const isProd = !isDev;
+console.log("isProd ="+ isProd)
 
-//jquery
-//css normalize
-//bootsrrap
-//xml ,csv
+const optimization = () => {
+  const config = {
+    splitChunks:{
+      chunks:"all"
+    }
+  }
+  if(isProd) {
+    config.minimizer = [
+      new OptimizeCssAssetsPlugin(),
+      new TerserPlugin()
+    ]
+  }
+  return config
+}
 
-//done 
-//публичный путь картинки
-//clean
-//css
-//шрифты
 module.exports = {
     entry: "./src/script.js", 
     output: {
@@ -38,11 +49,7 @@ module.exports = {
         '@dist':path.resolve(__dirname,"/dist")
       }
     },
-    optimization:{
-      splitChunks:{
-        chunks:"all"
-      }
-    },
+    optimization:optimization(),
     mode:"production",
     module:{
       rules:[
@@ -52,7 +59,8 @@ module.exports = {
             {
               loader: css.loader,
               options: {
-  
+                hmr:isDev,
+                reloadAll:true
               },
             },
             'css-loader',
@@ -94,12 +102,15 @@ module.exports = {
       new html({
         template:"./src/index.html",
         filename:'test.html',
-        minify:false
+        minify:{
+          collapseWhitespace:isProd,
+        }
       }),
-      new css(),
+      new css({
+        filename: "[name].putin.css"
+      }),
       new CopyPlugin([
         { from: './src/testCopy', to: '@dist' },
- 
       ]),
     ],
 }
