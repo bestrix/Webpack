@@ -8,7 +8,14 @@ module.exports = {
     
   output:{
     path:path.resolve(__dirname,"dist"),
-    filename:"Main.js"
+    filename:"Main.js",
+    publicPath:"/"
+  },
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, './dist'),
+
+    }
   },
   module:{
     rules:[
@@ -21,15 +28,35 @@ module.exports = {
        use:{
         loader: 'babel-loader',
        }
-     }
+     },
+     {
+      test: /\.(png|svg|jpg|gif)$/,
+      use: [
+      'file-loader',
+        ],
+    },
+    {
+      test: /\.(woff|woff2|eot|ttf|otf)$/,
+      use:[
+        'file-loader',
+      ]
+    }
     ]
   },
   plugins:[
     new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      template:"./src/index.html"
+    }),
     new MiniCssExtractPlugin({
       filename:"MAIN1.css"
     })
-  ]
+  ],
+  devServer: {
+    contentBase: path.join(__dirname, @defaultStatus),
+  },
+  watch:true
+
+  
 }
 // MiniCssExtractPlugin.loader

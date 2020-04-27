@@ -1,5 +1,3 @@
 
-
-
-console.log('script2')
+console.log("rrrrrrrrrrrrr")
 
