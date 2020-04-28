@@ -13,7 +13,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, './dist'),
+      "@dist": path.resolve(__dirname, './dist'),
 
     }
   },
@@ -35,6 +35,7 @@ module.exports = {
       'file-loader',
         ],
     },
+    { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" },
     {
       test: /\.(woff|woff2|eot|ttf|otf)$/,
       use:[
@@ -53,7 +54,7 @@ module.exports = {
     })
   ],
   devServer: {
-    contentBase: path.join(__dirname, @defaultStatus),
+   
   },
   watch:true
 
