@@ -13,7 +13,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, './dist'),
+      "@dist": path.resolve(__dirname, './dist'),
 
     }
   },
@@ -35,6 +35,7 @@ module.exports = {
       'file-loader',
         ],
     },
+    { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" },
     {
       test: /\.(woff|woff2|eot|ttf|otf)$/,
       use:[
@@ -72,7 +73,13 @@ module.exports = {
       filename:"MAIN1.css"
     })
   ],
+<<<<<<< HEAD
   devServer: {},
+=======
+  devServer: {
+   
+  },
+>>>>>>> 7ce9b34f0a6081684dae84dd7ac48691175437c3
   watch:true
 
   
