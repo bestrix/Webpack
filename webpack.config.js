@@ -4,11 +4,11 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
-  entry:"./src/script",
+  entry: ["@babel/polyfill", "./src/script.jsx"],
     
   output:{
     path:path.resolve(__dirname,"dist"),
-    filename:"Main.js",
+    filename:"Main.jsx",
     publicPath:"/"
   },
   resolve: {
@@ -40,6 +40,26 @@ module.exports = {
       use:[
         'file-loader',
       ]
+    },
+    { 
+      test: /\.js$/, 
+      exclude: /node_modules/, 
+      loader: "babel-loader" ,
+      options : {
+        presets:[
+          "@babel/preset-env"
+        ]
+      }
+    },
+    { 
+      test: /\.jsx$/, 
+      exclude: /node_modules/, 
+      loader: "babel-loader" ,
+      options : {
+        presets:[
+          "@babel/preset-react"
+        ]
+      }
     }
     ]
   },
@@ -52,9 +72,7 @@ module.exports = {
       filename:"MAIN1.css"
     })
   ],
-  devServer: {
-    contentBase: path.join(__dirname, @defaultStatus),
-  },
+  devServer: {},
   watch:true
 
   
