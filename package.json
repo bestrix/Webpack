@@ -10,6 +10,7 @@
   "browserslist": "> 0.25%, not dead",
   "devDependencies": {
     "@babel/core": "^7.9.0",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/preset-env": "^7.9.5",
     "@babel/preset-react": "^7.9.4",
     "babel-loader": "^8.1.0",
@@ -45,6 +46,4 @@
     "react-dom": "^16.13.1",
     "webpack-dev-server": "^3.10.3"
   },
-  "presets": ["@babel/preset-env"]
-  
 }
